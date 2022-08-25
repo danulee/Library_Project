@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="${board.name} 게시물 리스트" />
+<c:set var="pageTitle" value="책 리스트" />
 <%@ include file="../common/head.jspf"%>
 
 <section class="mt-5">
@@ -29,8 +29,7 @@
 			<table class="table table-fixed w-full">
 				<colgroup>
 					<col width="50" />
-					<col width="300" />
-					<col width="100" />
+					<col width="200" />
 					<col width="100" />
 					<col width="100" />
 					<col width="100" />
@@ -54,49 +53,21 @@
 							<td>${book.title}</td>
 							<td>${book.writer}</td>
 							<td>${book.publisher}</td>
-							<td>${book.rental}</td>
+							<c:if test="${book.rental==0}">
+								<td>대여 가능</td>
+							</c:if>
+							<c:if test="${book.rental!=0}">
+								<td>대여 중</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 
-		<!--  <div class="page-menu mt-4">
-			<div class="btn-group justify-center">
-				<c:set var="pageMenuArmLen" value="9" />
-				<c:set var="startPage"
-					value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}" />
-				<c:set var="endPage"
-					value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount}" />
 
-				<c:set var="pageBaseUri"
-					value="${pageBaseUri}&searchKeyword=${param.searchKeyword}" />
-				<c:set var="pageBaseUri"
-					value="${pageBaseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
-
-				<c:if test="${startPage > 1}">
-					<a class="btn btn-sm " href="${pageBaseUri}&page=1">1</a>
-					<c:if test="${startPage > 2}">
-						<a class="btn btn-sm btn-disabled">...</a>
-					</c:if>
-				</c:if>
-
-				<c:forEach begin="${startPage}" end="${endPage}" var="i">
-					<a class="btn btn-sm ${page == i ? 'btn-active' : '' }"
-						href="${pageBaseUri}&page=${i}">${i}</a>
-				</c:forEach>
-
-				<c:if test="${endPage < pagesCount}">
-					<c:if test="${endPage < pagesCount - 1}">
-						<a class="btn btn-sm btn-disabled">...</a>
-					</c:if>
-					<a class="btn btn-sm" href="${pageBaseUri}&page=${pagesCount}">${pagesCount}</a>
-				</c:if>
-			</div> 
-		</div>
 
 	</div>
-	
-</section>-->
+</section>
 
-		<%@ include file="../common/foot.jspf"%>
+<%@ include file="../common/foot.jspf"%>

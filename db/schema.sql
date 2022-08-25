@@ -1,7 +1,7 @@
 # DB 생성
-DROP DATABASE IF EXISTS kor_sb_2022_t;
-CREATE DATABASE kor_sb_2022_t;
-USE kor_sb_2022_t;
+DROP DATABASE IF EXISTS Library;
+CREATE DATABASE Library;
+USE Library;
 
 # 게시물 테이블 생성
 CREATE TABLE article (
@@ -336,3 +336,39 @@ UPDATE `member`
 SET loginPw = SHA2(loginPw, 256);
 
 SELECT * FROM MEMBER;
+
+CREATE TABLE book(
+   id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   regDate DATETIME NOT NULL,
+   title CHAR(40) NOT NULL,
+   writer CHAR(30) NOT NULL,
+   publisher CHAR(30) NOT NULL,
+   rental SMALLINT(2) NOT NULL DEFAULT 0 COMMENT '대여가능 = 0, 대여 중 = 1'
+);
+
+INSERT INTO book
+SET regDate = NOW(),
+title = '제목1',
+writer = '글쓴이1',
+publisher = '출판사1';
+
+INSERT INTO book
+SET regDate = NOW(),
+title = '제목2',
+writer = '글쓴이2',
+publisher = '출판사2';
+
+INSERT INTO book
+SET regDate = NOW(),
+title = '제목3',
+writer = '글쓴이1',
+publisher = '출판사3';
+
+INSERT INTO book
+SET regDate = NOW(),
+title = '제목4',
+writer = '글쓴이3',
+publisher = '출판사1',
+rental = 1;
+
+SELECT * FROM book;
