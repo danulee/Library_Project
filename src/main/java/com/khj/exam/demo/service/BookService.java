@@ -30,10 +30,10 @@ public class BookService {
 		int limitTake = itemsCountInAPage;
 
 		List<Book> books = bookRepository.getForPrintBooks(searchKeyword, searchKeywordTypeCode, limitStart, limitTake);
-
-	     for (Book book : books) {
-			updateForPrintData(book);
-		}
+//
+//	     for (Book book : books) {
+//			updateForPrintData(book);
+//		}
 
 		return books;
 	}
@@ -50,6 +50,21 @@ public class BookService {
 			return;
 		}
 
+	}
+	
+	public ResultData rentalBook(int id) {
+		int RentalBook=	bookRepository.rentalBook(id);
+		bookRepository.returnDate(id);
+		if(RentalBook==0)
+			return ResultData.from("F-1", "대여 실패하셨습니다.");
+		return ResultData.from("S-1", "대여 완료되었습니다.", "RentalBook", RentalBook);
+	}
+	
+	public ResultData returnBook(int id) {
+		int ReturnBook=	bookRepository.returnBook(id);
+		if(ReturnBook==0)
+			return ResultData.from("F-1", "반납 실패하셨습니다.");
+		return ResultData.from("S-1", "반납 완료되었습니다.", "ReturnBook", ReturnBook);
 	}
 ////
 //	public void deleteArticle(int id) {

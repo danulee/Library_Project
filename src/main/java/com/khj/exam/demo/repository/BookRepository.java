@@ -56,8 +56,8 @@ public interface BookRepository {
 				</if>
 			</script>
 			""")
-	public List<Book> getForPrintBooks(String searchKeyword, String searchKeywordTypeCode,
-			int limitStart, int limitTake);
+	public List<Book> getForPrintBooks(String searchKeyword, String searchKeywordTypeCode, int limitStart,
+			int limitTake);
 
 	public int getLastInsertId();
 
@@ -86,6 +86,33 @@ public interface BookRepository {
 			</script>
 			""")
 	public int getBooksCount(String searchKeywordTypeCode, String searchKeyword);
+
+	@Update("""
+			<script>
+			UPDATE book
+			SET rentalDate =NOW(), rental =1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int rentalBook(int id);
+
+	@Update("""
+			<script>
+			UPDATE book
+			SET returnDate = (SELECT DATE_ADD(rentalDate, INTERVAL 7 DAY) FROM book WHERE id = #{id})
+			WHERE id = #{id}
+			</script>
+			""")
+	public void returnDate(int id);
+
+	@Update("""
+			<script>
+			UPDATE book
+			SET rentalDate = null , returnDate = null , rental = 0
+			WHERE id = #{id}
+			</script>
+			""")
+	public int returnBook(int id);
 //
 //	@Update("""
 //			<script>

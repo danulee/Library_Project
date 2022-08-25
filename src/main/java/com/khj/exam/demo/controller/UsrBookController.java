@@ -41,7 +41,7 @@ public class UsrBookController {
 		int itemsCountInAPage = 10;
 		int pagesCount = (int) Math.ceil((double) booksCount / itemsCountInAPage);
 		List<Book> books = bookService.getForPrintBooks(searchKeyword, searchKeywordTypeCode, itemsCountInAPage, page);
-       
+		model.addAttribute("rq",this.rq);
 		model.addAttribute("page", page);
 		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("booksCount", booksCount);
@@ -49,7 +49,21 @@ public class UsrBookController {
 		
 		return "usr/book/list";
 	}
+	@RequestMapping("/usr/book/doRental")
+	@ResponseBody
+	public String RentalBook(int id,String replaceUri) {
+		ResultData<Integer> RentalBook = bookService.rentalBook(id);
 
+		return  rq.jsReplace(RentalBook.getMsg(), replaceUri);
+	}
+	
+	@RequestMapping("/usr/book/doReturn")
+	@ResponseBody
+	public String ReturnBook(int id,String replaceUri) {
+		ResultData<Integer> ReturnBook = bookService.returnBook(id);
+
+		return  rq.jsReplace(ReturnBook.getMsg(), replaceUri);
+	}
 //	@RequestMapping("/usr/article/detail")
 //	public String showDetail(Model model, int id) {
 //		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);

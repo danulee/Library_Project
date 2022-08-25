@@ -372,3 +372,21 @@ publisher = '출판사1',
 rental = 1;
 
 SELECT * FROM book;
+
+ALTER TABLE book ADD COLUMN rentalDate DATETIME;
+
+UPDATE book
+SET rentalDate = NOW()
+WHERE id =4;
+
+ALTER TABLE book ADD COLUMN rentalDate DATETIME;
+
+UPDATE book
+SET rentalDate = NOW()
+WHERE id =4;
+
+ALTER TABLE book ADD COLUMN returnDate DATETIME;
+
+UPDATE book
+SET returnDate = (SELECT DATE_ADD(rentalDate, INTERVAL 7 DAY) FROM book WHERE id =4)
+WHERE id =4;
