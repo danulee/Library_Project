@@ -34,7 +34,6 @@
 					<col width="100" />
 					<col width="50" />
 					<col width="50" />
-					<col width="100" />
 					<col />
 				</colgroup>
 				<thead>
@@ -44,7 +43,6 @@
 						<th>수정날짜</th>
 						<th>조회</th>
 						<th>추천</th>
-						<th>작성자</th>
 						<th>제목</th>
 					</tr>
 				</thead>
@@ -56,7 +54,6 @@
 							<td>${article.forPrintType1UpdateDate}</td>
 							<td>${article.hitCount}</td>
 							<td>${article.goodReactionPoint}</td>
-							<td>${article.extra__writerName}</td>
 							<td><a class="btn-text-link block w-full truncate"
 								href="${rq.getArticleDetailUriFromArticleList(article)}">${article.title}</a></td>
 						</tr>

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Insert;
 
 import com.khj.exam.demo.vo.Book;
 
@@ -113,7 +114,17 @@ public interface BookRepository {
 			</script>
 			""")
 	public int returnBook(int id);
+	
+	@Insert("""
+	       <script>
+	       INSERT INTO book
+	       SET title = #{title} , writer = #{writer} , publisher = #{publisher} , regDate = NOW()
+	       </script>
+	       """)
+	public int registBook(String title, String writer, String publisher);
+	
 //
+	
 //	@Update("""
 //			<script>
 //			UPDATE article

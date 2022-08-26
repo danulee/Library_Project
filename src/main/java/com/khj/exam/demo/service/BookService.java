@@ -66,6 +66,13 @@ public class BookService {
 			return ResultData.from("F-1", "반납 실패하셨습니다.");
 		return ResultData.from("S-1", "반납 완료되었습니다.", "ReturnBook", ReturnBook);
 	}
+	
+	public ResultData registBook(String title, String writer, String publisher) {
+		int RegistBook=	bookRepository.registBook(title,writer,publisher);
+		if(RegistBook==0)
+			return ResultData.from("F-1", "등록 실패하셨습니다.");
+		return ResultData.from("S-1", "등록 완료되었습니다.", "RegistBook", RegistBook);
+	}
 ////
 //	public void deleteArticle(int id) {
 //		articleRepository.deleteArticle(id);

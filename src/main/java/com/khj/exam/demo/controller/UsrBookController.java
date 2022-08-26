@@ -64,8 +64,42 @@ public class UsrBookController {
 
 		return  rq.jsReplace(ReturnBook.getMsg(), replaceUri);
 	}
+	
+
+	@RequestMapping("/usr/book/regist")
+	public String RegistBook() {
+		return "usr/book/regist";
+	}
+	
+	
+	@RequestMapping("/usr/book/doRegist")
+	@ResponseBody
+	public String doRegist(String title, String writer, String publisher, @RequestParam(defaultValue = "/") String afterLoginUri) {
+		if (Ut.empty(title)) {
+			return rq.jsHistoryBack("F-1", "제목(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(writer)) {
+			return rq.jsHistoryBack("F-2", "작가(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(publisher)) {
+			return rq.jsHistoryBack("F-3", "출판사(을)를 입력해주세요.");
+		}
+
+	
+		ResultData<Integer> registRd = bookService.registBook(title, writer, publisher);
+
+		if (registRd.isFail()) {
+			return rq.jsHistoryBack(registRd.getResultCode(), registRd.getMsg());
+		}
+
+		String afterJoinUri = "../book/regist?afterLoginUri=" + Ut.getUriEncoded(afterLoginUri);
+
+		return rq.jsReplace("책등록이 완료 되었습니다.", afterJoinUri);
+	}
+	
 //	@RequestMapping("/usr/article/detail")
-//	public String showDetail(Model model, int id) {
 //		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 //
 //		model.addAttribute("article", article);
