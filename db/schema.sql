@@ -400,3 +400,7 @@ SET NAME = "책 신청"
 WHERE id =2;
 
 SELECT * FROM article;
+
+UPDATE MEMBER
+SET email = "admin@gmail.com"
+WHERE id = 1;
