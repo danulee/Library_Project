@@ -16,7 +16,7 @@ public class Book {
 	private int rental;
 	private String rentalDate;
 	private String returnDate;
-	private String userId;
+	private Member user;
 	
 	public String getForPrintType1RegDate() {
 		return regDate.substring(2, 16).replace(" ", "<br>");
@@ -27,4 +27,5 @@ public class Book {
 	public String getForPrintType1ReturnDate() {
 		return returnDate.substring(2, 10);
 	}
+	
 }

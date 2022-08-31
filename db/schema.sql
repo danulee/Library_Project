@@ -390,3 +390,13 @@ ALTER TABLE book ADD COLUMN returnDate DATETIME;
 UPDATE book
 SET returnDate = (SELECT DATE_ADD(rentalDate, INTERVAL 7 DAY) FROM book WHERE id =4)
 WHERE id =4;
+
+SELECT * FROM MEMBER;
+
+SELECT * FROM board;
+
+UPDATE board
+SET NAME = "책 신청"
+WHERE id =2;
+
+SELECT * FROM article;

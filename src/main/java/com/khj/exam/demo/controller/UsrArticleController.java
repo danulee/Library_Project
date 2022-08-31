@@ -178,13 +178,16 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/write")
-	public String showWrite(Model model) {
+	public String showWrite(Model model, int boardId) {
+		Board board = boardService.getBoardById(boardId);
+		model.addAttribute("boardId", boardId);
+		model.addAttribute("board", board);
 		return "usr/article/write";
 	}
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(@RequestParam(defaultValue = "1") int boardId, String title, String body, String replaceUri) {
+	public String doWrite(@RequestParam(defaultValue = "1")int boardId, String title, String body, String replaceUri) {
 		if (Ut.empty(boardId)) {
 			return rq.jsHistoryBack("게시판을 선택해주세요.");
 		}

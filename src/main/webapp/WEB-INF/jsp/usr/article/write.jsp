@@ -48,7 +48,7 @@
 <section class="mt-5">
 	<div class="container mx-auto px-3">
 		<form onsubmit="ArticleWrite__submit(this); return false;"
-			class="table-box-type-1" method="POST" action="../article/doWrite">
+			class="table-box-type-1" method="POST" action="../article/doWrite?boardId = ${boardId}">
 			<input type="hidden" name="body" />
 			<table>
 				<colgroup>
@@ -63,9 +63,7 @@
 					<tr>
 						<th>게시판</th>
 						<td><select class="select select-bordered" name=boardId>
-								<option selected disabled>게시판을 선택해주세요.</option>
-								<option value="1">공지</option>
-								<option value="2">자유</option>
+								<option value="${boardId}">${board.name}</option>
 						</select> <!-- 
               <label>
                 공지

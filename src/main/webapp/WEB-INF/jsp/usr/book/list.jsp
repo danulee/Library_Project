@@ -65,8 +65,7 @@
 							<c:if test="${book.rental!=0}">
 								<td>대여 중</td>
 								<td><a class="btn-text-link block w-full truncate"
-								href="../book/doReturn?id=${book.id}&replaceUri=${rq.currentUri}">반납 신청</a></td>
-								
+								href="../book/doReturn?id=${book.id}&replaceUri=${rq.currentUri}">반납 처리</a></td>
 							</c:if>
 						</tr>
 					</c:forEach>

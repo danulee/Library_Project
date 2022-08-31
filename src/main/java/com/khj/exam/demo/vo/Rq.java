@@ -25,6 +25,10 @@ public class Rq {
 	private int loginedMemberId;
 	@Getter
 	private Member loginedMember;
+	@Getter
+	private boolean isAdmin;
+
+
 
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
@@ -40,17 +44,21 @@ public class Rq {
 		this.session = req.getSession();
 
 		boolean isLogined = false;
+		boolean isAdmin = false;
 		int loginedMemberId = 0;
 
 		if (session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			loginedMember = memberService.getMemberById(loginedMemberId);
-		}
-
+			if(this.loginedMember.getName()=="관리자")
+				isAdmin=true;
+			}
+		     
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
+		this.isAdmin = isAdmin;
 	}
 
 	public void printHistoryBackJs(String msg) {
@@ -168,5 +176,6 @@ public class Rq {
 	public String getArticleDetailUriFromArticleList(Article article) {
 		return "../article/detail?id=" + article.getId() + "&listUri=" + getEncodedCurrentUri();
 	}
+	
 
 }

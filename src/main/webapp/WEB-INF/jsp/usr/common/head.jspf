@@ -51,9 +51,6 @@
 				<li><a href="/"
 					class="h-full flex items-center px-3 hover:underline"> <span>홈</span>
 				</a></li>
-				<li><a href="/usr/article/write"
-					class="h-full flex items-center px-3 hover:underline"> <span>작성</span>
-				</a></li>
 				<li><a href="/usr/article/list?boardId=1"
 					class="h-full flex items-center px-3 hover:underline"> <span>공지사항
 							게시판</span>
@@ -61,9 +58,11 @@
 				<li><a href="/usr/article/list?boardId=2"
 					class="h-full flex items-center px-3 hover:underline"> <span>책 신청 게시판</span>
 				</a></li>
-				<li><a href="/usr/book/regist"
+				<c:if test="${rq.logined}">
+					<li><a href="/usr/book/regist"
 					class="h-full flex items-center px-3 hover:underline"> <span>책 등록</span>
 				</a></li>
+				</c:if>
 				<li><a href="/usr/book/list"
 					class="h-full flex items-center px-3 hover:underline"> <span>책 목록</span>
 				</a></li>

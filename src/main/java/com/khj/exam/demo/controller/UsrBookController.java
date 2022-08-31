@@ -53,7 +53,6 @@ public class UsrBookController {
 	@ResponseBody
 	public String RentalBook(int id,String replaceUri) {
 		ResultData<Integer> RentalBook = bookService.rentalBook(id);
-
 		return  rq.jsReplace(RentalBook.getMsg(), replaceUri);
 	}
 	

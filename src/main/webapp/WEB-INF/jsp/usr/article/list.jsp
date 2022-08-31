@@ -99,5 +99,9 @@
 
 	</div>
 </section>
-
+<div class="flex">
+<button class="ml-2 btn btn-primary flex ml-auto mr-6"><a href="/usr/article/write?boardId=${boardId}"
+					class="h-full flex items-center px-3 hover:underline"> <span>게시글 작성</span>
+				</a></button>
+</div>
 <%@ include file="../common/foot.jspf"%>

@@ -8,10 +8,12 @@ import com.khj.exam.demo.repository.BookRepository;
 import com.khj.exam.demo.utill.Ut;
 import com.khj.exam.demo.vo.Book;
 import com.khj.exam.demo.vo.ResultData;
+import com.khj.exam.demo.vo.Rq;
 
 @Service
 public class BookService {
 	private BookRepository bookRepository;
+	private Rq rq;
 
 	public BookService(BookRepository bookRepository) {
 		this.bookRepository = bookRepository;
@@ -57,6 +59,8 @@ public class BookService {
 		bookRepository.returnDate(id);
 		if(RentalBook==0)
 			return ResultData.from("F-1", "대여 실패하셨습니다.");
+		Book book = getForPrintBook(id);
+		book.setUser(rq.getLoginedMember());
 		return ResultData.from("S-1", "대여 완료되었습니다.", "RentalBook", RentalBook);
 	}
 	
